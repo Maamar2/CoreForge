@@ -1,0 +1,26 @@
+# PowerShell
+*.ps1xml
+*.psd1
+
+# Build artifacts
+*.exe
+*.dll
+*.pdb
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
