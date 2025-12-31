@@ -214,6 +214,7 @@
                                     <CheckBox Name="chkGamePriority" Content="Set Game Priority (MMCSS Tweaks)"/>
                                     <CheckBox Name="chkDisableCoreParking" Content="Disable CPU Core Parking"/>
                                     <CheckBox Name="chkHardwareGPU" Content="Enable Hardware-Accelerated GPU Scheduling"/>
+                                    <CheckBox Name="chkDisableMouseAccel" Content="Disable Mouse Acceleration"/>
                                 </StackPanel>
                             </GroupBox>
                             

@@ -172,4 +172,22 @@ function Enable-HardwareAcceleratedGPU {
     Write-Log "Hardware-Accelerated GPU Scheduling Enabled (Restart required)." "Green"
 }
 
-Export-ModuleMember -Function Disable-Telemetry, Enable-Telemetry, Set-PowerPlanUltimate, Disable-Hibernation, Disable-SysMain, Remove-GameDVR, Set-ExplorerOptions, Enable-GameMode, Optimize-NetworkForGaming, Disable-PowerThrottling, Set-GamePriority, Disable-CPUCoreParking, Enable-HardwareAcceleratedGPU
+function Disable-MouseAcceleration {
+    Write-Log "Disabling Mouse Acceleration for precise gaming control..." "Yellow"
+    $mousePath = "HKCU:\Control Panel\Mouse"
+    if (!(Test-Path $mousePath)) { New-Item -Path $mousePath -Force | Out-Null }
+    Set-ItemProperty -Path $mousePath -Name "MouseSpeed" -Value "0" -Type String -Force
+    Set-ItemProperty -Path $mousePath -Name "MouseThreshold1" -Value "0" -Type String -Force
+    Set-ItemProperty -Path $mousePath -Name "MouseThreshold2" -Value "0" -Type String -Force
+    Write-Log "Mouse Acceleration disabled (thresholds zeroed)." "Green"
+}
+
+function Enable-MouseAcceleration {
+    Write-Log "Restoring default Mouse Acceleration settings..." "Yellow"
+    $mousePath = "HKCU:\Control Panel\Mouse"
+    Set-ItemProperty -Path $mousePath -Name "MouseThreshold1" -Value "6" -Type String -Force
+    Set-ItemProperty -Path $mousePath -Name "MouseThreshold2" -Value "10" -Type String -Force
+    Write-Log "Mouse Acceleration restored to Windows defaults." "Green"
+}
+
+Export-ModuleMember -Function Disable-Telemetry, Enable-Telemetry, Set-PowerPlanUltimate, Disable-Hibernation, Disable-SysMain, Remove-GameDVR, Set-ExplorerOptions, Enable-GameMode, Optimize-NetworkForGaming, Disable-PowerThrottling, Set-GamePriority, Disable-CPUCoreParking, Enable-HardwareAcceleratedGPU, Disable-MouseAcceleration, Enable-MouseAcceleration

@@ -47,7 +47,7 @@ $Controls = "btnScanSystem", "btnApplyTweaks", "btnUndoTweaks", "btnPurgeBloat",
 "chkDisableTelemetry", "chkDisableLocation", "chkDisableWiFiSense",
 "chkHighPerfPlan", "chkDisableHibernation", "chkDisableSysMain",
 "chkGameDVR", "chkExplorerPrefs",
-"chkEnableGameMode", "chkOptimizeNetwork", "chkDisablePowerThrottle", "chkGamePriority", "chkDisableCoreParking", "chkHardwareGPU",
+"chkEnableGameMode", "chkOptimizeNetwork", "chkDisablePowerThrottle", "chkGamePriority", "chkDisableCoreParking", "chkHardwareGPU", "chkDisableMouseAccel",
 "lstInstalledApps", "txtAppCount",
 "txtTerminal", "txtSysInfo", "txtRestoreStatus"
 
@@ -181,6 +181,10 @@ $WPFbtnApplyTweaks.Add_Click({
                 Enable-HardwareAcceleratedGPU
                 $script:anySelected = $true
             }
+            if ($WPFchkDisableMouseAccel.IsChecked) {
+                Disable-MouseAcceleration
+                $script:anySelected = $true
+            }
             
             if (-not $script:anySelected) {
                 Write-Log "No tweaks selected." "Yellow"
@@ -191,7 +195,10 @@ $WPFbtnApplyTweaks.Add_Click({
 $WPFbtnUndoTweaks.Add_Click({
         Write-Log "Rolling back Tweaks..." "Yellow"
         # Basic rollback for demo
-        Invoke-CoreForgeTask -TaskName "Undo Telemetry" -Action { Enable-Telemetry } -CreateRestorePoint $false
+        Invoke-CoreForgeTask -TaskName "Rollback Tweaks" -Action {
+            Enable-Telemetry
+            Enable-MouseAcceleration
+        } -CreateRestorePoint $false
     })
 
 # --- Debloat Tab Handlers ---

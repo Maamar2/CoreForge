@@ -129,6 +129,8 @@ Open CONFIG_NODE tab to:
 
 **Hardware-Accelerated GPU Scheduling**: Offloads GPU scheduling from CPU to GPU, reducing input latency. Requires restart.
 
+**Disable Mouse Acceleration**: Disables Windows pointer acceleration (MouseThreshold1/2=0) for 1:1 precise mouse control in competitive gaming.
+
 ## Safety & Rollback
 
 ### System Restore Points
